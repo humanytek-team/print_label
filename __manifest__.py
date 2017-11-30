@@ -30,7 +30,8 @@
     'website': "http://www.humanytek.com",
     'category': 'Stock',
     'version': '1.0.0',
-    'depends': ['mrp', 'sale', 'sale_order_observation'],
+    'depends': ['mrp', 'sale', 'sale_order_observation',
+                'sale_guide_transport'],
     'data': [
         'view/stock_picking_view.xml',
         'report/print_label_report.xml',
