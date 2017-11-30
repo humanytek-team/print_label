@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="print_label_shipping">
+            <t t-call="report.html_container">
+
+                <t
+                    t-call="print_label.shipping_report_document"
+                    t-lang="user.partner_id.lang"/>
+            </t>
+        </template>
+
+        <!-- Translatable template -->
+        <template id="shipping_report_document">
+            <t t-set="docs" t-value="docs.with_context({'lang':user.partner_id.lang})" />
+            <!--<t t-call="report.external_layout">-->
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div class="row">
+                            <div
+                                class="row table table-condensed"
+                                style="font-size: 14px; background-color: #DDDDDD;border: 1px solid #ddd;border-collapse: collapse;padding: 5px;">
+                                <h1 t-field="o.partner_id.name" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <h1 t-field="o.partner_id.name" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                class="row table table-condensed"
+                                style="font-size: 14px; background-color: #DDDDDD;border: 3px solid #ddd;border-collapse: collapse;padding: 5px;">
+                                <h1 t-field="o.partner_id.name" />
+                            </div>
+                        </div>
+                        <!--<div class="row">-->
+                        <div
+                            class="row table table-condensed"
+                            style="font-size: 14px; border: 3px solid #ddd;border-collapse: collapse;padding: 5px;">
+                            <h1 t-field="o.partner_id.name" />
+                        </div>
+                        <div
+                            class="row mt32 mb32"
+                            style="font-size: 14px; border: 3px solid #ddd">
+                            <div class="col-xs-5">
+                                <p t-field="o.partner_id.name" />
+                            </div>
+                            <div class="col-xs-7">
+                                <p t-field="o.partner_id.name" />
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            <!--</t>-->
+        </template>
+
+    </data>
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="print_label_product"
+            string="Etiqueta de Productos"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            file="print_label.print_label_product2"
+            name="print_label.print_label_product2"
+        />
+
+        <report
+            id="print_label_shipping1"
+            string="Etiqueta de Embarque"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            file="print_label.print_label_shipping"
+            name="print_label.print_label_shipping"
+        />
+    </data>
+</odoo>

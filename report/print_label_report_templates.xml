@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="print_label_product2">
+            <t t-call="report.html_container">
+
+                <t
+                    t-call="print_label.product_report_document"
+                    t-lang="user.partner_id.lang"/>
+            </t>
+        </template>
+
+        <!-- Translatable template -->
+        <template id="product_report_document">
+            <t t-set="docs" t-value="docs.with_context({'lang':user.partner_id.lang})" />
+            <!--<t t-call="report.external_layout">-->
+                <t t-foreach="docs" t-as="o">
+                        <t t-foreach="o.pack_operation_product_ids" t-as="pack">
+                            <t t-foreach="decimal_format(pack.qty_done)" t-as="qty">
+                                <div class="page">
+                                    <div class="row" style="font-size: 30px;">
+                                        <strong><span t-field="o.min_date" /></strong>
+                                    </div>
+                                    <div class="row">
+                                            <h1 t-field="o.partner_id.name" />
+                                    </div>
+                                    <div class="row">
+                                            <h1 t-field="pack.product_id.default_code" />
+                                            <h2 t-field="pack.product_id.name" />
+                                    </div>
+                                </div>
+                            </t>
+                        </t>
+                </t>
+            <!--</t>-->
+        </template>
+
+    </data>
+</odoo>
