@@ -21,13 +21,14 @@
                             <div class="page">
                                 <div class="row" >
                                     <div class="col-xs-4" style="font-size: 14px; margin-top:0; margin-bottom:0;">
-                                        <strong><span t-field="o.min_date" /></strong>
+                                        <strong><h3 t-field="o.min_date" /></strong>
                                     </div>
                                     <div class="col-xs-4" style="font-size: 14px; margin-top:0; margin-bottom:0;">
-                                        <strong><span t-field="o.sale_id.type_id.name" /></strong>
+                                        <strong><h3 t-esc="op_name(o.sale_id.id, qty)" />
+                                        </strong>
                                     </div>
                                     <div class="col-xs-4" style="font-size: 14px; margin-top:0; margin-bottom:0;">
-                                        <strong><span t-field="o.sale_id.type_id.name" /></strong>
+                                        <strong><h3 t-field="o.sale_id.type_id.name" /></strong>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -38,7 +39,7 @@
                                         <h1 t-field="pack.product_id.default_code" />
                                         <h2 t-field="pack.product_id.name" />
                                 </div>
-                                <div class="row text-center" style="font-size: 20px;">
+                                <div class="row text-center" style="font-size: 22px;">
                                         <span t-esc="qty+1" /> /
                                         <span t-esc="decimal_format(pack.product_uom_qty)" />
 

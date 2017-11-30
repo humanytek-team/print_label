@@ -30,14 +30,15 @@ class PrintLabelProd2(models.AbstractModel):
     #_template = 'print_label.print_label_prod2'
 
     def decimal_format(self, num):
-        _logger.info('QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ')
-        _logger.info(num)
         return int(num)
 
-    def len_pack_operation_product(self, o):
-        _logger.info('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL')
-        #return len(o.pack_operation_product_ids)
-        return 4
+    def op_name(self, sale_id, num):
+        MrpProduction = self.env['mrp.production']
+        mrp_productions = MrpProduction.search([
+                                            ('sale_id.id', '=', sale_id)])
+        if len(mrp_productions) > num:
+            return mrp_productions[num].name
+        return ''
 
     @api.model
     def render_html(self, docids, data=None):
@@ -47,14 +48,8 @@ class PrintLabelProd2(models.AbstractModel):
         report = Report._get_report_from_name(
             'print_label.print_label_product2')
         docs = StockPicking.browse(docids)
-        #tz = self.env.context.get('tz', False)
-        #if not tz:
-            #tz = 'US/Arizona'
-        #datetime_now = datetime.now(timezone(tz))
-        #data['extra_data'].update({
-            #'datetime': datetime_now.strftime('%d/%m/%y %H:%M:%S'), })
         docargs = {
-            'len_pack_operation_product': self.len_pack_operation_product,
+            'op_name': self.op_name,
             'decimal_format': self.decimal_format,
             'doc_ids': docids,
             'doc_model': report.model,
