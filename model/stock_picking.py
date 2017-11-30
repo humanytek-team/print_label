@@ -20,25 +20,13 @@
 #
 ###############################################################################
 
-{
-    'name': "Print Label",
-    'summary': """
-    """,
-    'description': """
-    """,
-    'author': "Humanytek",
-    'website': "http://www.humanytek.com",
-    'category': 'Stock',
-    'version': '1.0.0',
-    'depends': ['mrp', 'sale', 'sale_order_observation'],
-    'data': [
-        'view/stock_picking_view.xml',
-        'report/print_label_report.xml',
-        'report/print_label_report_templates.xml',
-        'report/print_label_shipping_report_templates.xml',
+from odoo import models, fields
+import logging
+_logger = logging.getLogger(__name__)
 
-        #'data/mrp_report_data.xml'
-    ],
-    'demo': [
-    ],
-}
+
+class StockPicking(models.Model):
+    _name = "stock.picking"
+    _inherit = 'stock.picking'
+
+    box = fields.Integer('Boxes', default=1)

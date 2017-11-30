@@ -20,25 +20,4 @@
 #
 ###############################################################################
 
-{
-    'name': "Print Label",
-    'summary': """
-    """,
-    'description': """
-    """,
-    'author': "Humanytek",
-    'website': "http://www.humanytek.com",
-    'category': 'Stock',
-    'version': '1.0.0',
-    'depends': ['mrp', 'sale', 'sale_order_observation'],
-    'data': [
-        'view/stock_picking_view.xml',
-        'report/print_label_report.xml',
-        'report/print_label_report_templates.xml',
-        'report/print_label_shipping_report_templates.xml',
-
-        #'data/mrp_report_data.xml'
-    ],
-    'demo': [
-    ],
-}
+import stock_picking

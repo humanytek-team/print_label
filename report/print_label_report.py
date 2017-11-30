@@ -25,14 +25,19 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class PrintLabelProduct(models.AbstractModel):
-    _name = 'report.print_label.print_label_product2'
-    #_template = 'print_label.print_label_product2'
+class PrintLabelProd2(models.AbstractModel):
+    _name = 'report.print_label.print_label_prod2'
+    #_template = 'print_label.print_label_prod2'
 
     def decimal_format(self, num):
         _logger.info('QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ')
         _logger.info(num)
         return int(num)
+
+    def len_pack_operation_product(self, o):
+        _logger.info('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL')
+        #return len(o.pack_operation_product_ids)
+        return 4
 
     @api.model
     def render_html(self, docids, data=None):
@@ -49,6 +54,7 @@ class PrintLabelProduct(models.AbstractModel):
         #data['extra_data'].update({
             #'datetime': datetime_now.strftime('%d/%m/%y %H:%M:%S'), })
         docargs = {
+            'len_pack_operation_product': self.len_pack_operation_product,
             'decimal_format': self.decimal_format,
             'doc_ids': docids,
             'doc_model': report.model,
@@ -56,4 +62,4 @@ class PrintLabelProduct(models.AbstractModel):
             'data': data,
         }
 
-        return Report.render('print_label.print_label_product2', docargs)
+        return Report.render('print_label.print_label_prod2', docargs)

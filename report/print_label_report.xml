@@ -2,12 +2,12 @@
 <odoo>
     <data>
         <report
-            id="print_label_product"
+            id="print_label_prod"
             string="Etiqueta de Productos"
             model="stock.picking"
             report_type="qweb-pdf"
-            file="print_label.print_label_product2"
-            name="print_label.print_label_product2"
+            file="print_label.print_label_prod2"
+            name="print_label.print_label_prod2"
         />
 
         <report
