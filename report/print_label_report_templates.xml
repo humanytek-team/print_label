@@ -50,31 +50,5 @@
             <!--</t>-->
         </template>
 
-
-
-        <!-- Translatable template -->
-        <template id="prod_report_document12">
-            <t t-set="docs" t-value="docs.with_context({'lang':user.partner_id.lang})" />
-            <!--<t t-call="report.external_layout">-->
-                <t t-foreach="docs" t-as="o">
-                        <t t-foreach="len_pack_operation_product(o)" t-as="pack">
-                            <!--<t t-foreach="decimal_format(pack.qty_done)" t-as="qty">-->
-                                <div class="page">
-                                    <div class="row" >
-                                        <strong><span t-field="o.min_date" /></strong>
-                                    </div>
-                                    <div class="row">
-                                            <h1 t-field="o.partner_id.name" />
-                                    </div>
-                                    <!--<div class="row">
-                                            <h1 t-field="pack.product_id.default_code" />
-                                            <h2 t-field="pack.product_id.name" />
-                                    </div>-->
-                                </div>
-                            <!--</t>-->
-                        </t>
-                </t>
-            <!--</t>-->
-        </template>
     </data>
 </odoo>

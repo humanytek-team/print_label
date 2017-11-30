@@ -18,5 +18,14 @@
             file="print_label.print_label_shipping"
             name="print_label.print_label_shipping"
         />
+
+        <report
+            id="print_order_shipping1"
+            string="Orden de Embarque"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            file="print_label.print_order_shipping"
+            name="print_label.print_order_shipping"
+        />
     </data>
 </odoo>
