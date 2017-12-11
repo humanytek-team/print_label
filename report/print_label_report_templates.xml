@@ -16,7 +16,9 @@
             <t t-set="docs" t-value="docs.with_context({'lang':user.partner_id.lang})" />
             <!--<t t-call="report.external_layout">-->
                 <t t-foreach="docs" t-as="o">
+                    <t t-set="i" t-value="0"/>
                     <t t-foreach="o.move_lines" t-as="pack">
+
                         <t t-foreach="decimal_format(pack.product_uom_qty)" t-as="qty">
                             <div class="page">
                                 <div class="row" >
@@ -24,16 +26,25 @@
                                         <strong><span t-esc="o.min_date" /></strong>
                                     </div>
                                     <div class="col-xs-4" style="font-size: 12px; margin-top:0; margin-bottom:0;">
-                                        <strong><span t-esc="op_name(o.sale_id.id, qty)" />
+                                        <strong><span t-esc="op_name(o.sale_id.id, i)" />
                                         </strong>
+
                                     </div>
-                                    <div class="col-xs-4" style="font-size: 12px; margin-top:0; margin-bottom:0;">
+                                    <div class="col-xs-4" style="font-size: 14px; margin-top:0; margin-bottom:0;">
                                         <strong><span t-esc="o.sale_id.type_id.name" /></strong>
                                     </div>
                                 </div>
                                 <br/>
                                 <div class="row" style="font-size: 18px;">
-                                        <strong><span t-esc="o.partner_id.name" /></strong>
+                                    <span
+                                        t-if="o.partner_id.parent_id">
+                                            <strong><span t-esc="o.partner_id.parent_id.name" /></strong>
+                                    </span>
+                                    <span
+                                        t-else="">
+                                            <strong><span t-esc="o.partner_id.name" /></strong>
+                                    </span>
+
                                 </div>
                                 <br/>
                                 <div class="row" style="font-size: 18px;">
@@ -43,13 +54,13 @@
                                         <span t-esc="pack.product_id.name" />
                                 </div>
                                 <div class="row text-center" style="font-size: 14px;">
-                                    <!--<div class="col-xs-4 col-xs-offset-4 text-right" style="font-size: 14px; margin-top:0; margin-bottom:0;">-->
-                                        <span t-esc="qty+1" /> /
-                                        <span t-esc="decimal_format(pack.product_uom_qty)" />
-                                    <!--</div>-->
+                                    <span t-esc="qty+1" /> /
+                                    <span t-esc="decimal_format(pack.product_uom_qty)" /><br/>
+                                    <span t-esc="get_observation(o.sale_id.id, i)" />
                                 </div>
                             </div>
                         </t>
+                        <t t-set="i" t-value="i+1"/>
                     </t>
                 </t>
             <!--</t>-->

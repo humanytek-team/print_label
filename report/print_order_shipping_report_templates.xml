@@ -44,7 +44,14 @@
                                             <h3 >Cliente</h3>
                                         </div>
                                         <div class="col-xs-8" style="font-size: 14px; border: 3px solid #ddd;margin-top:0; margin-bottom:0;">
-                                            <h3 t-field="o.partner_id.name" />
+                                            <span
+                                                t-if="o.partner_id.parent_id">
+                                                    <h3 t-esc="o.partner_id.parent_id.name" />
+                                            </span>
+                                            <span
+                                                t-else="">
+                                                    <h3 t-esc="o.partner_id.name" />
+                                            </span>
                                         </div>
                                     </div>
                                     <div

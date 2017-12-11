@@ -40,6 +40,14 @@ class PrintLabelProd2(models.AbstractModel):
             return mrp_productions[num].name
         return ''
 
+    def get_observation(self, sale_id, num):
+        MrpProduction = self.env['mrp.production']
+        mrp_productions = MrpProduction.search([
+                                            ('sale_id.id', '=', sale_id)])
+        if len(mrp_productions) > num:
+            return mrp_productions[num].sale_line_observation
+        return ''
+
     @api.model
     def render_html(self, docids, data=None):
         #docids = self._ids
@@ -49,6 +57,7 @@ class PrintLabelProd2(models.AbstractModel):
             'print_label.print_label_product2')
         docs = StockPicking.browse(docids)
         docargs = {
+            'get_observation': self.get_observation,
             'op_name': self.op_name,
             'decimal_format': self.decimal_format,
             'doc_ids': docids,

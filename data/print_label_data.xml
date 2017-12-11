@@ -23,8 +23,8 @@
         <record id="label_shipping" model="report.paperformat">
             <field name="name">Label Shipping</field>
             <field name="format">custom</field>
-            <field name="page_height">127</field>
-            <field name="page_width">102</field>
+            <field name="page_height">102</field>
+            <field name="page_width">127</field>
             <field name="margin_top">2</field>
             <field name="margin_left">2</field>
             <field name="margin_right">2</field>
