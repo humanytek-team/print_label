@@ -56,7 +56,6 @@
                                 <div class="row text-center" style="font-size: 14px;">
                                     <span t-esc="qty+1" /> /
                                     <span t-esc="decimal_format(pack.product_uom_qty)" /><br/>
-
                                 </div>
                                 <div class="row text-center" style="font-size: 10px;">
                                     <span t-esc="get_observation(o.sale_id.id, i)" />

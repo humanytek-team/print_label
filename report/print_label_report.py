@@ -48,6 +48,15 @@ class PrintLabelProd2(models.AbstractModel):
             return mrp_productions[num].sale_line_observation
         return ''
 
+    #def get_move_line(self):
+        #move_lines.move_lines
+        #MrpProduction = self.env['stock.move']
+        #mrp_productions = MrpProduction.search([
+                                            #('sale_id.id', '=', sale_id)])
+        #if len(mrp_productions) > num:
+            #return mrp_productions[num].sale_line_observation
+        #return ''
+
     @api.model
     def render_html(self, docids, data=None):
         #docids = self._ids
