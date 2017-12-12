@@ -32,20 +32,28 @@ class PrintLabelProd2(models.AbstractModel):
     def decimal_format(self, num):
         return int(num)
 
-    def op_name(self, sale_id, num):
-        MrpProduction = self.env['mrp.production']
-        mrp_productions = MrpProduction.search([
-                                            ('sale_id.id', '=', sale_id)])
-        if len(mrp_productions) > num:
-            return mrp_productions[num].name
+    def op_name(self, move_id):
+        StockMove = self.env['stock.move']
+        moves = StockMove.search([('move_dest_id.id', '=', move_id)])
+        if moves:
+            return moves[0].production_id.name
+        #MrpProduction = self.env['mrp.production']
+        #mrp_productions = MrpProduction.search([
+                                            #('sale_id.id', '=', sale_id)])
+        #if len(mrp_productions) > num:
+            #return mrp_productions[num].name
         return ''
 
-    def get_observation(self, sale_id, num):
-        MrpProduction = self.env['mrp.production']
-        mrp_productions = MrpProduction.search([
-                                            ('sale_id.id', '=', sale_id)])
-        if len(mrp_productions) > num:
-            return mrp_productions[num].sale_line_observation
+    def get_observation(self, move_id):
+        StockMove = self.env['stock.move']
+        moves = StockMove.search([('move_dest_id.id', '=', move_id)])
+        if moves:
+            return moves[0].production_id.sale_line_observation
+        #MrpProduction = self.env['mrp.production']
+        #mrp_productions = MrpProduction.search([
+                                            #('sale_id.id', '=', sale_id)])
+        #if len(mrp_productions) > num:
+            #return mrp_productions[num].sale_line_observation
         return ''
 
     #def get_move_line(self):
