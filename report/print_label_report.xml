@@ -27,5 +27,15 @@
             file="print_label.print_order_shipping"
             name="print_label.print_order_shipping"
         />
+
+        <report
+            id="print_label_prod_mrp"
+            string="Etiqueta de Productos"
+            model="mrp.production"
+            report_type="qweb-pdf"
+            file="print_label.print_label_prod2_mrp"
+            name="print_label.print_label_prod2_mrp"
+        />
+
     </data>
 </odoo>
