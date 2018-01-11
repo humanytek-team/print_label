@@ -74,10 +74,7 @@ class PrintLabelProd2Mrp(models.AbstractModel):
     def get_date(self, mrp_id):
         StockMove = self.env['stock.move']
         moves = StockMove.search([('production_id.id', '=', mrp_id)])
-        _logger.info('vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv')
-        _logger.info(mrp_id)
         if moves:
-            _logger.info('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
             if moves[0].move_dest_id:
                 if moves[0].move_dest_id.picking_id:
                     return moves[0].move_dest_id.picking_id.min_date

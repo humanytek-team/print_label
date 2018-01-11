@@ -14,56 +14,46 @@
         <!-- Translatable template -->
         <template id="prod_mrp_report_document2">
             <t t-set="docs" t-value="docs.with_context({'lang':user.partner_id.lang})" />
-            <!--<t t-call="report.external_layout">-->
-                <t t-foreach="docs" t-as="o">
-                    <!--<t t-foreach="o.move_lines" t-as="pack">-->
-
-                        <t t-foreach="decimal_format(o.product_qty)" t-as="qty">
-                            <div class="page">
-                                <div class="row" >
-                                    <div class="col-xs-4" style="font-size: 12px; margin-top:0; margin-bottom:0;">
-                                        <strong><span t-esc="get_date(o.id)" /></strong>
-                                    </div>
-                                    <div class="col-xs-4" style="font-size: 12px; margin-top:0; margin-bottom:0;">
-                                        <!--<strong><span t-esc="op_name(pack.id)" />-->
-                                        <strong><span t-esc="o.name" />
-                                        </strong>
-
-                                    </div>
-                                    <div class="col-xs-4" style="font-size: 14px; margin-top:0; margin-bottom:0;">
-                                        <strong><span t-esc="o.sale_id.type_id.name" /></strong>
-                                    </div>
-                                </div>
-                                <br/>
-                                <div class="row" style="font-size: 18px;">
-                                    <!--<span
-                                        t-if="o.partner_id.parent_id">
-                                            <strong><span t-esc="o.sale_id.partner_id.parent_id.name" /></strong>
-                                    </span>-->
-                                    <span>
-                                            <strong><span t-esc="o.partner_id.name" /></strong>
-                                    </span>
-
-                                </div>
-                                <br/>
-                                <div class="row" style="font-size: 18px;">
-                                        <strong><span t-esc="o.product_id.default_code" /></strong>
-                                </div>
-                                <div class="row" style="font-size: 16px;">
-                                        <span t-esc="o.product_id.name" />
-                                </div>
-                                <div class="row text-center" style="font-size: 14px;">
-                                    <span t-esc="qty+1" /> /
-                                    <span t-esc="decimal_format(o.product_qty)" /><br/>
-                                </div>
-                                <div class="row text-center" style="font-size: 10px;">
-                                    <span t-esc="o.sale_line_observation" />
-                                </div>
+            <t t-foreach="docs" t-as="o">
+                <t t-foreach="decimal_format(o.product_qty)" t-as="qty">
+                    <div class="page">
+                        <div class="row" >
+                            <div class="col-xs-4" style="font-size: 12px; margin-top:0; margin-bottom:0;">
+                                <strong><span t-esc="get_date(o.id)" /></strong>
                             </div>
-                        </t>
-                    <!--</t>-->
+                            <div class="col-xs-4" style="font-size: 12px; margin-top:0; margin-bottom:0;">
+                                <strong><span t-esc="o.name" />
+                                </strong>
+
+                            </div>
+                            <div class="col-xs-4" style="font-size: 14px; margin-top:0; margin-bottom:0;">
+                                <strong><span t-esc="o.sale_id.type_id.name" /></strong>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row" style="font-size: 18px;">
+                            <span>
+                                    <strong><span t-esc="o.partner_id.name" /></strong>
+                            </span>
+
+                        </div>
+                        <br/>
+                        <div class="row" style="font-size: 18px;">
+                                <strong><span t-esc="o.product_id.default_code" /></strong>
+                        </div>
+                        <div class="row" style="font-size: 14px;">
+                                <span t-esc="o.product_id.name" />
+                        </div>
+                        <div class="row text-center" style="font-size: 14px;">
+                            <span t-esc="qty+1" /> /
+                            <span t-esc="decimal_format(o.product_qty)" /><br/>
+                        </div>
+                        <div class="row text-center" style="font-size: 10px;">
+                            <span t-esc="o.sale_line_observation" />
+                        </div>
+                    </div>
                 </t>
-            <!--</t>-->
+            </t>
         </template>
 
     </data>
