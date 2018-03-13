@@ -17,9 +17,10 @@
             <t t-foreach="docs" t-as="o">
                 <t t-foreach="decimal_format(o.product_qty)" t-as="qty">
                     <div class="page">
+                      <t t-set="data" t-value="get_data(o.id)" />
                         <div class="row" >
                             <div class="col-xs-4" style="font-size: 12px; margin-top:0; margin-bottom:0;">
-                                <strong><span t-esc="get_date(o.id)" /></strong>
+                                <strong><span t-if="data.get('date')" t-esc="data['date']" /></strong>
                             </div>
                             <div class="col-xs-4" style="font-size: 12px; margin-top:0; margin-bottom:0;">
                                 <strong><span t-esc="o.name" />
@@ -27,22 +28,29 @@
 
                             </div>
                             <div class="col-xs-4" style="font-size: 14px; margin-top:0; margin-bottom:0;">
-                                <strong><span t-esc="o.sale_id.type_id.name" /></strong>
+                                <!--<strong><span t-esc="o.sale_id.type_id.name" /></strong>-->
+                                <!--<strong><span t-esc="get_type(o.id)" /></strong>-->
+                                <strong><span t-if="data.get('type')" t-esc="data['type']" /></strong>
                             </div>
                         </div>
                         <br/>
                         <div class="row" style="font-size: 16px;">
                             <span>
-                                    <strong><span t-esc="o.partner_id.name" /></strong>
+                                <!--<strong><span t-esc="o.partner_id.name" /></strong>-->
+                                <!--<strong><span t-esc="get_partner_name(o.id)" /></strong>-->
+                                <strong><span t-if="data.get('partner_name')" t-esc="data['partner_name']" /></strong>
                             </span>
-
                         </div>
                         <br/>
                         <div class="row" style="font-size: 18px;">
-                                <strong><span t-esc="o.product_id.default_code" /></strong>
+                            <!--<strong><span t-esc="o.product_id.default_code" /></strong>-->
+                            <!--<strong><span t-esc="get_product_default(o.id)" /></strong>-->
+                            <strong><span t-if="data.get('product_default')" t-esc="data['product_default']" /></strong>
                         </div>
                         <div class="row" style="font-size: 14px;">
-                                <span t-esc="o.product_id.name" />
+                            <!--<strong><span t-esc="get_product_name(o.id)" /></strong>-->
+                            <!--<span t-esc="o.product_id.name" />-->
+                            <strong><span t-if="data.get('product_name')" t-esc="data['product_name']" /></strong>
                         </div>
                         <div class="row text-center" style="font-size: 10px;">
                             <span t-esc="o.sale_line_observation" />
@@ -51,7 +59,7 @@
                             <span t-esc="qty+1" /> /
                             <span t-esc="decimal_format(o.product_qty)" /><br/>
                         </div>
-
+                      <!--</t>-->
                     </div>
                 </t>
             </t>
