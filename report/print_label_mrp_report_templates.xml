@@ -4,7 +4,6 @@
 
         <template id="print_label_prod2_mrp">
             <t t-call="report.html_container">
-
                 <t
                     t-call="print_label.prod_mrp_report_document2"
                     t-lang="user.partner_id.lang"/>
@@ -25,11 +24,9 @@
                             <div class="col-xs-4" style="font-size: 12px; margin-top:0; margin-bottom:0;">
                                 <strong><span t-esc="o.name" />
                                 </strong>
-
                             </div>
                             <div class="col-xs-4" style="font-size: 14px; margin-top:0; margin-bottom:0;">
                                 <!--<strong><span t-esc="o.sale_id.type_id.name" /></strong>-->
-                                <!--<strong><span t-esc="get_type(o.id)" /></strong>-->
                                 <strong><span t-if="data.get('type')" t-esc="data['type']" /></strong>
                             </div>
                         </div>
@@ -37,23 +34,21 @@
                         <div class="row" style="font-size: 16px;">
                             <span>
                                 <!--<strong><span t-esc="o.partner_id.name" /></strong>-->
-                                <!--<strong><span t-esc="get_partner_name(o.id)" /></strong>-->
                                 <strong><span t-if="data.get('partner_name')" t-esc="data['partner_name']" /></strong>
                             </span>
                         </div>
                         <br/>
                         <div class="row" style="font-size: 18px;">
                             <!--<strong><span t-esc="o.product_id.default_code" /></strong>-->
-                            <!--<strong><span t-esc="get_product_default(o.id)" /></strong>-->
                             <strong><span t-if="data.get('product_default')" t-esc="data['product_default']" /></strong>
                         </div>
                         <div class="row" style="font-size: 14px;">
-                            <!--<strong><span t-esc="get_product_name(o.id)" /></strong>-->
                             <!--<span t-esc="o.product_id.name" />-->
                             <strong><span t-if="data.get('product_name')" t-esc="data['product_name']" /></strong>
                         </div>
                         <div class="row text-center" style="font-size: 10px;">
-                            <span t-esc="o.sale_line_observation" />
+                            <!--<span t-esc="o.sale_line_observation" />-->
+                            <strong><span t-if="data.get('observation')" t-esc="data['observation']" /></strong>
                         </div>
                         <div class="row text-center" style="font-size: 14px;">
                             <span t-esc="qty+1" /> /
