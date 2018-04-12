@@ -110,9 +110,9 @@ class PrintLabelProd2Mrp(models.AbstractModel):
         if dat:
             data['date'] = dat[0]
             data['type'] = dat[1]
-            data['partner_name'] = dat[2]
+            data['partner_name'] = dat[2][:41]
             data['product_default'] = dat[3]
-            data['product_name'] = dat[4]
+            data['product_name'] = dat[4][:82]
             data['observation'] = dat[5]
         return data
 
