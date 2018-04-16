@@ -91,7 +91,8 @@ class PrintLabelProd2Mrp(models.AbstractModel):
 
     def get_data(self, mrp_id):
         self.env.cr.execute("""SELECT sp.min_date, sot.name, rp.name,
-                            pp.default_code, pt.name, sol.observation
+                            pp.default_code, pt.name, sol.observation,
+                            mp.product_qty, mp.name
                   FROM mrp_production mp
                   JOIN stock_move sm ON sm.production_id = mp.id
                   JOIN stock_move smd ON smd.id = sm.move_dest_id
@@ -114,6 +115,8 @@ class PrintLabelProd2Mrp(models.AbstractModel):
             data['product_default'] = dat[3]
             data['product_name'] = dat[4][:82]
             data['observation'] = dat[5]
+            data['qty'] = int(dat[6])
+            data['mrp_name'] = dat[7]
         return data
 
     @api.model
@@ -122,7 +125,8 @@ class PrintLabelProd2Mrp(models.AbstractModel):
         MrpProduction = self.env['mrp.production']
         report = Report._get_report_from_name(
             'print_label.print_label_product2_mrp')
-        docs = MrpProduction.browse(docids)
+        #docs = MrpProduction.browse(docids)
+        docs = docids
         docargs = {
             'get_data': self.get_data,
             #'get_date': self.get_date,

@@ -12,18 +12,19 @@
 
         <!-- Translatable template -->
         <template id="prod_mrp_report_document2">
-            <t t-set="docs" t-value="docs.with_context({'lang':user.partner_id.lang})" />
+           <!-- <t t-set="docs" t-value="docs.with_context({'lang':user.partner_id.lang})" />-->
             <t t-foreach="docs" t-as="o">
-                <t t-foreach="decimal_format(o.product_qty)" t-as="qty">
+                <t t-set="data" t-value="get_data(o)" />
+                <t t-foreach="data['qty']" t-as="qty">
                     <div class="page">
-                      <t t-set="data" t-value="get_data(o.id)" />
+                      <!--<t t-set="data" t-value="get_data(o.id)" />-->
                         <div class="container" >
                         <div class="row" >
                             <div class="col-xs-4" style="font-size: 12px; margin-top:0; margin-bottom:0;">
                                 <strong><span t-if="data.get('date')" t-esc="data['date']" /></strong>
                             </div>
                             <div class="col-xs-4" style="font-size: 12px; margin-top:0; margin-bottom:0;">
-                                <strong><span t-esc="o.name" />
+                                <strong><span t-if="data.get('mrp_name')" t-esc="data['mrp_name']" />
                                 </strong>
                             </div>
                             <div class="col-xs-4" style="font-size: 14px; margin-top:0; margin-bottom:0;">
@@ -32,7 +33,7 @@
                             </div>
                         </div>
                         <br/>
-                        <div class="row" style="font-size: 16px;width:150px;height:14px;overflow:hidden;">
+                        <div class="row" style="font-size: 16px;">
                             <!--<span >-->
                                 <!--<strong><span t-esc="o.partner_id.name" /></strong>-->
                                 <strong><span t-if="data.get('partner_name')" t-esc="data['partner_name']" /></strong>
@@ -43,7 +44,7 @@
                             <!--<strong><span t-esc="o.product_id.default_code" /></strong>-->
                             <strong><span t-if="data.get('product_default')" t-esc="data['product_default']" /></strong>
                         </div>
-                        <div class="row" style="font-size: 14px;height:18px;overflow:hidden; ">
+                        <div class="row" style="font-size: 14px;">
                             <!--<span t-esc="o.product_id.name" />-->
                             <strong><span t-if="data.get('product_name')" t-esc="data['product_name']" /></strong>
                         </div>
@@ -53,7 +54,7 @@
                         </div>
                         <div class="row text-center" style="font-size: 14px;">
                             <span t-esc="qty+1" /> /
-                            <span t-esc="decimal_format(o.product_qty)" /><br/>
+                            <span t-esc="data['qty']" /><br/>
                         </div>
                       <!--</t>-->
                     </div>
