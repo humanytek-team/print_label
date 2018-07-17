@@ -33,7 +33,7 @@
         'sale',
     ],
     'data': [
-        'data/print_label_data.xml'
+        'data/print_label_data.xml',
         'report/print_label_mrp_report_templates.xml',
         'report/print_label_report_templates.xml',
         'report/print_label_report.xml',
