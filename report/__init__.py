@@ -20,4 +20,4 @@
 #
 ###############################################################################
 
-import print_label_report
+from . import print_label_report

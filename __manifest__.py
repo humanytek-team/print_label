@@ -22,26 +22,23 @@
 
 {
     'name': "Print Label",
-    'summary': """
-    """,
-    'description': """
-    """,
     'author': "Humanytek",
     'website': "http://www.humanytek.com",
     'category': 'Stock',
-    'version': '1.0.0',
-    'depends': ['mrp', 'sale', 'sale_order_observation',
-                'sale_guide_transport'],
+    'version': '1.0.1',
+    'depends': [
+        'mrp',
+        'sale_guide_transport',
+        'sale_order_observation',
+        'sale',
+    ],
     'data': [
-        'view/stock_picking_view.xml',
-        'report/print_label_report.xml',
+        'data/print_label_data.xml'
+        'report/print_label_mrp_report_templates.xml',
         'report/print_label_report_templates.xml',
+        'report/print_label_report.xml',
         'report/print_label_shipping_report_templates.xml',
         'report/print_order_shipping_report_templates.xml',
-        'report/print_label_mrp_report_templates.xml',
-
-        'data/print_label_data.xml'
-    ],
-    'demo': [
+        'view/stock_picking_view.xml',
     ],
 }

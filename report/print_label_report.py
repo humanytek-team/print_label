@@ -61,7 +61,6 @@ class PrintLabelProd2(models.AbstractModel):
             'docs': docs,
             'data': data,
         }
-
         return Report.render('print_label.print_label_prod2', docargs)
 
 
@@ -71,41 +70,25 @@ class PrintLabelProd2Mrp(models.AbstractModel):
     def decimal_format(self, num):
         return int(num)
 
-    #def get_date(self, mrp_id):
-        ##StockMove = self.env['stock.move']
-        ##moves = StockMove.search([('production_id.id', '=', mrp_id)])
-        ##if moves:
-            ##if moves[0].move_dest_id:
-                ##if moves[0].move_dest_id.picking_id:
-                    ##return moves[0].move_dest_id.picking_id.min_date
-        #self.env.cr.execute("""SELECT sp.min_date
-                  #FROM stock_move sm
-                  #JOIN stock_move smd ON smd.id = sm.move_dest_id
-                  #JOIN stock_picking sp ON sp.id = smd.picking_id
-                  #WHERE sm.production_id = %s;
-            #""", (mrp_id,))
-        #dates = self.env.cr.fetchone()
-        #if dates:
-            #return dates[0]
-        #return ''
-
     def get_data(self, mrp_id):
-        self.env.cr.execute("""SELECT sp.min_date, sot.name, rp.name,
-                            pp.default_code, pt.name, sol.observation,
-                            mp.product_qty, mp.name
-                  FROM mrp_production mp
-                  JOIN stock_move sm ON sm.production_id = mp.id
-                  JOIN stock_move smd ON smd.id = sm.move_dest_id
-                  JOIN procurement_order po ON po.id = smd.procurement_id
-                  JOIN sale_order_line sol ON sol.id = po.sale_line_id
-                  JOIN stock_picking sp ON sp.id = smd.picking_id
-                  JOIN sale_order so ON so.id = mp.sale_id
-                  JOIN sale_order_type sot ON sot.id = so.type_id
-                  JOIN res_partner rp ON rp.id = mp.partner_id
-                  JOIN product_product pp ON pp.id = mp.product_id
-                  JOIN product_template pt ON pt.id = pp.product_tmpl_id
-                  WHERE sm.production_id = %s;
-            """, (mrp_id,))
+        self.env.cr.execute(
+            """
+                SELECT sp.min_date, sot.name, rp.name, pp.default_code, pt.name, sol.observation, mp.product_qty, mp.name
+                FROM mrp_production mp
+                JOIN stock_move sm ON sm.production_id = mp.id
+                JOIN stock_move smd ON smd.id = sm.move_dest_id
+                JOIN procurement_order po ON po.id = smd.procurement_id
+                JOIN sale_order_line sol ON sol.id = po.sale_line_id
+                JOIN stock_picking sp ON sp.id = smd.picking_id
+                JOIN sale_order so ON so.id = mp.sale_id
+                JOIN sale_order_type sot ON sot.id = so.type_id
+                JOIN res_partner rp ON rp.id = mp.partner_id
+                JOIN product_product pp ON pp.id = mp.product_id
+                JOIN product_template pt ON pt.id = pp.product_tmpl_id
+                WHERE sm.production_id = %s;
+            """,
+            (mrp_id,)
+        )
         dat = self.env.cr.fetchone()
         data = {}
         if dat:
@@ -122,23 +105,15 @@ class PrintLabelProd2Mrp(models.AbstractModel):
     @api.model
     def render_html(self, docids, data=None):
         Report = self.env['report']
-        MrpProduction = self.env['mrp.production']
         report = Report._get_report_from_name(
             'print_label.print_label_product2_mrp')
-        #docs = MrpProduction.browse(docids)
         docs = docids
         docargs = {
             'get_data': self.get_data,
-            #'get_date': self.get_date,
             'decimal_format': self.decimal_format,
-            #'get_type': self.get_type,
-            #'get_partner_name': self.get_partner_name,
-            #'get_product_name': self.get_product_name,
-            #'get_product_default': self.get_product_default,
             'doc_ids': docids,
             'doc_model': report.model,
             'docs': docs,
             'data': data,
         }
-
         return Report.render('print_label.print_label_prod2_mrp', docargs)

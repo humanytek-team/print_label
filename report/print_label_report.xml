@@ -1,41 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <report
-            id="print_label_prod"
-            string="Etiqueta de Productos"
-            model="stock.picking"
-            report_type="qweb-pdf"
-            file="print_label.print_label_prod2"
-            name="print_label.print_label_prod2"
-        />
+  <data>
+    <report id="print_label_prod" string="Etiqueta de Productos" model="stock.picking" report_type="qweb-pdf" file="print_label.print_label_prod2" name="print_label.print_label_prod2"/>
 
-        <report
-            id="print_label_shipping1"
-            string="Etiqueta de Embarque"
-            model="stock.picking"
-            report_type="qweb-pdf"
-            file="print_label.print_label_shipping"
-            name="print_label.print_label_shipping"
-        />
+    <report id="print_label_shipping1" string="Etiqueta de Embarque" model="stock.picking" report_type="qweb-pdf" file="print_label.print_label_shipping" name="print_label.print_label_shipping"/>
 
-        <report
-            id="print_order_shipping1"
-            string="Orden de Embarque"
-            model="stock.picking"
-            report_type="qweb-pdf"
-            file="print_label.print_order_shipping"
-            name="print_label.print_order_shipping"
-        />
+    <report id="print_order_shipping1" string="Orden de Embarque" model="stock.picking" report_type="qweb-pdf" file="print_label.print_order_shipping" name="print_label.print_order_shipping"/>
 
-        <report
-            id="print_label_prod_mrp"
-            string="Etiqueta de Productos"
-            model="mrp.production"
-            report_type="qweb-pdf"
-            file="print_label.print_label_prod2_mrp"
-            name="print_label.print_label_prod2_mrp"
-        />
-
-    </data>
+    <report id="print_label_prod_mrp" string="Etiqueta de Productos" model="mrp.production" report_type="qweb-pdf" file="print_label.print_label_prod2_mrp" name="print_label.print_label_prod2_mrp"/>
+  </data>
 </odoo>

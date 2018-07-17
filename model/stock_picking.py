@@ -26,7 +26,10 @@ _logger = logging.getLogger(__name__)
 
 
 class StockPicking(models.Model):
-    _name = "stock.picking"
+    _name = 'stock.picking'
     _inherit = 'stock.picking'
 
-    box = fields.Integer('Boxes', default=1)
+    box = fields.Integer(
+        string='Boxes',
+        default=1,
+    )

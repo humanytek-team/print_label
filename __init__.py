@@ -20,5 +20,5 @@
 #
 ###############################################################################
 
-import report
-import model
+from . import report
+from . import model
