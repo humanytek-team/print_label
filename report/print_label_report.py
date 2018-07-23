@@ -71,35 +71,30 @@ class PrintLabelProd2Mrp(models.AbstractModel):
         return int(num)
 
     def get_data(self, mrp_id):
-        self.env.cr.execute(
-            """
-                SELECT sp.min_date, sot.name, rp.name, pp.default_code, pt.name, sol.observation, mp.product_qty, mp.name
-                FROM mrp_production mp
-                JOIN stock_move sm ON sm.production_id = mp.id
-                JOIN stock_move smd ON smd.id = sm.move_dest_id
-                JOIN procurement_order po ON po.id = smd.procurement_id
-                JOIN sale_order_line sol ON sol.id = po.sale_line_id
-                JOIN stock_picking sp ON sp.id = smd.picking_id
-                JOIN sale_order so ON so.id = mp.sale_id
-                JOIN sale_order_type sot ON sot.id = so.type_id
-                JOIN res_partner rp ON rp.id = mp.partner_id
-                JOIN product_product pp ON pp.id = mp.product_id
-                JOIN product_template pt ON pt.id = pp.product_tmpl_id
-                WHERE sm.production_id = %s;
-            """,
-            (mrp_id,)
-        )
-        dat = self.env.cr.fetchone()
+        mrp_production = self.env['mrp.production'].browse(mrp_id)
         data = {}
-        if dat:
-            data['date'] = dat[0]
-            data['type'] = dat[1]
-            data['partner_name'] = dat[2][:41]
-            data['product_default'] = dat[3]
-            data['product_name'] = dat[4][:82]
-            data['observation'] = dat[5]
-            data['qty'] = int(dat[6])
-            data['mrp_name'] = dat[7]
+        if mrp_production:
+            data['qty'] = int(mrp_production.product_qty)
+            data['mrp_production_name'] = mrp_production.name
+            sale_order = mrp_production.sale_id
+            sale_order_type = sale_order and sale_order.type_id
+            data['type'] = sale_order_type and sale_order_type.name or 'UNKNOWN'
+            res_partner = mrp_production.partner_id
+            data['partner_name'] = res_partner and res_partner.name or 'UNKNOWN'
+            product_product = mrp_production.product_id
+            data['product_default'] = product_product and product_product.default_code or 'UNKNOWN'
+            product_template = product_product and product_product.product_tmpl_id
+            data['product_name'] = product_template and product_template.name or 'UNKNOWN'
+            stock_move = self.env['stock.move'].search([('production_id', '=', mrp_production.id)], limit=1)
+            stock_move_dest = stock_move and stock_move.move_dest_id
+            stock_picking = stock_move_dest and stock_move_dest.picking_id
+            data['date'] = stock_picking and stock_picking.min_date or 'UNKNOWN'
+            procurement_order = stock_move_dest and stock_move_dest.procurement_id
+            sale_order_line = procurement_order and procurement_order.sale_line_id
+            if sale_order_line:
+                data['observation'] = sale_order_line.observation
+            else:
+                data['observation'] = 'UNKNOWN'
         return data
 
     @api.model
